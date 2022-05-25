@@ -28,3 +28,21 @@ DEVELOPMENT=1
 ```
 
 When moving to production, remove the DEVELOPMENT from the `.env` file. 
+
+The original code created by testdriven.io can be found [here](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_templates). 
+
+## Getting Started:
+
+In order to start using this template, perform the following to setup.
+
+```
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ cd frontend
+$ npm install
+$ npm run build
+$ cd ..
+$ python manage.py runserver
+```
+
+The website should then be viewable from [http://localhost:8000](http://localhost:8000)
