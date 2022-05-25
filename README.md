@@ -46,3 +46,7 @@ $ python manage.py runserver
 ```
 
 The website should then be viewable from [http://localhost:8000](http://localhost:8000)
+
+## About:
+
+For this website, it currently uses the users that are created from django-admin for signup, (`python manage.py createsuperuser`). Use this command in order to create users that can login at the moment. Further custom models can be created using the `models.py` file to create non-admin users. 
