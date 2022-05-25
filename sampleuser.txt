@@ -1,0 +1,3 @@
+username: randor
+email: ry12nicholas@gmail.com
+Password: testing12!
