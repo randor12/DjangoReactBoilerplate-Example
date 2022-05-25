@@ -1,10 +1,13 @@
 import React from "react";
 import Cookies from "universal-cookie";
 
+// Deal with authentication
 const cookies = new Cookies();
 
+// Class for the React Application
 class App extends React.Component {
 
+  // Initialize variables 
   constructor(props) {
     super(props);
 
@@ -20,10 +23,12 @@ class App extends React.Component {
 
   }
 
+  // Initialize sessions 
   componentDidMount = () => {
     this.getSession();
   }
 
+  // Get if authenticated already or not 
   getSession = () => {
     fetch("/api/session/", {
       credentials: "same-origin",
@@ -42,6 +47,7 @@ class App extends React.Component {
     });
   }
 
+  // Get "who am i" for authentication 
   whoami = () => {
     fetch("/api/whoami/", {
       headers: {
@@ -52,6 +58,7 @@ class App extends React.Component {
     .then((res) => res.json())
     .then((data) => {
       console.log("You are logged in as: " + data.username);
+      this.setState({username: data.username});
     })
     .catch((err) => {
       console.log(err);
@@ -183,7 +190,7 @@ class App extends React.Component {
         );
       }
       else {
-        // Sign In Page 
+        // Sign Up Page 
         return (
           <div className="container mt-3">
             <h1>Boilerplate React Cookie Auth</h1>
@@ -233,6 +240,7 @@ class App extends React.Component {
       <div className="container mt-3">
         <h1>React Cookie Auth</h1>
         <p>You are logged in!</p>
+        <p>Welcome {this.state.username}!</p>
         <button className="btn btn-primary mr-2" onClick={this.whoami}>WhoAmI</button>
         <button className="btn btn-danger" onClick={this.logout}>Log out</button>
       </div>
