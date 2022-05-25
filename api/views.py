@@ -101,7 +101,6 @@ def check_password_strength(passwrd):
     return 0
 
 @require_POST
-@csrf_exempt
 def register_view(request):
     # register new user 
     if request.method == 'POST':
