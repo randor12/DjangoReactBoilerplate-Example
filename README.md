@@ -47,3 +47,14 @@ $ python manage.py runserver
 
 The website should then be viewable from [http://localhost:8000](http://localhost:8000)
 
+## Updates
+
+The original code was updated to include a sign up page. This was originally not included in the code. 
+
+The primary dashboard page also collects all the information required and is able to display `whoami` information 
+on load of the new dashboard. This can be updated further in the future to be used as the official "home page" for whatever
+application is being worked on. With the current implementation, the website can't have multiple URL's. 
+
+However, if multiple URLs are implemented, the backend code can be updated to reflect the following [code](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_same_origin) or a [DRF Approach](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_drf_same_origin).
+
+Finally, if authentication someone wishes to authenticate once across mutliple domains, the following [code](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_cross_origin) would be useful. All of these codes are also found in the tutorial.
