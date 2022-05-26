@@ -111,57 +111,73 @@ def register_view(request):
     # register new user 
     if request.method == 'POST':
         # ensure only post request 
+        print('Registering...')
         data = json.loads(request.body)
         username = data.get('username')
         password1 = data.get('password1')
         password2 = data.get('password2')
-        email = normalize_email(data.get('email'))
+        email = data.get('email')
+        
+        print('Loaded all data...')
         
         if username is None:
             # validate username
-            return JsonResponse({'detail': 'Must create username.'}, status=400)
+            print('Bad Username')
+            return JsonResponse({'detail': 'Must create username.'}, status=200)
         
         if check_username(username):
             # ensure username does not already exist
-            return JsonResponse({'detail': 'Username already exists.'}, status=400)
+            print('username exists')
+            return JsonResponse({'detail': 'Username already exists.'}, status=200)
             
         
         if email is None:
             # check email exists
-            return JsonResponse({'detail': 'Must enter email.'}, status=400)
+            print('Email failed')
+            return JsonResponse({'detail': 'Must enter email.'}, status=200)
         
         try:
             # validate the email is an email
             validate_email(email)
+            email = normalize_email(email)
         except Exception as e:
-            return JsonResponse({'detail': 'Must be a valid email'})
+            print('validation failed')
+            return JsonResponse({'detail': 'Must be a valid email'}, status=200)
         
         if password1 is None:
             # validate password 
-            return JsonResponse({'detail': 'Must create password'}, status=400)
+            print('Bad password')
+            return JsonResponse({'detail': 'Must create password'}, status=200)
         
         if password1 != password2:
             # ensure passwords match 
-            return JsonResponse({'detail': 'Passwords must match'}, status=400)
+            print('Password does not match')
+            return JsonResponse({'detail': 'Passwords must match'}, status=200)
         
         check_passwrd_str = check_password_strength(password1)
+        print('Checking password strength')
         # ensure the password strength is high enough
         if check_passwrd_str == 1:
-            return JsonResponse({'detail': 'Password must have at least 8 characters.'}, status=400)
+            return JsonResponse({'detail': 'Password must have at least 8 characters.'}, status=200)
         elif check_passwrd_str == 2:
-            return JsonResponse({'detail': 'Password must contain at least one number'}, status=400)
+            return JsonResponse({'detail': 'Password must contain at least one number'}, status=200)
         elif check_passwrd_str == 3:
-            return JsonResponse({'detail': 'Password must contain at least one alphabetical character'}, status=400)
+            return JsonResponse({'detail': 'Password must contain at least one alphabetical character'}, status=200)
         elif check_passwrd_str == 4:
-            return JsonResponse({'detail': 'Password must contain at least one non-alphanumeric character (!, _, @, etc...)'}, status=400)
+            return JsonResponse({'detail': 'Password must contain at least one non-alphanumeric character (!, _, @, etc...)'}, status=200)
+        
+        print('Verified all data')
         
         # create new user 
         new_user = User.objects.create_user(username=username, email=email)
         new_user.set_password(password1)
         new_user.save()
         
+        print('Created new user')
+        
         return JsonResponse({'detail': 'Successfully registered'}, status=200)
         
+    print('Not a POST request')
     return JsonResponse({'detail': "Only POST requests allowed"}, status=400)
     
 def logout_view(request):

@@ -35,18 +35,18 @@ class App extends React.Component {
     fetch("/api/session/", {
       credentials: "same-origin",
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      if (data.isAuthenticated) {
-        this.setState({isAuthenticated: true});
-      } else {
-        this.setState({isAuthenticated: false});
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.isAuthenticated) {
+          this.setState({ isAuthenticated: true });
+        } else {
+          this.setState({ isAuthenticated: false });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // Get "who am i" for authentication 
@@ -57,39 +57,40 @@ class App extends React.Component {
       },
       credentials: "same-origin",
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("You are logged in as: " + data.username);
-      this.setState({username: data.username});
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("You are logged in as: " + data.username);
+        this.setState({ username: data.username });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handlePasswordChange = (event) => {
     // update password on form change 
-    this.setState({password: event.target.value});
+    this.setState({ password: event.target.value });
   }
 
   handleUserNameChange = (event) => {
     // update username information on form change 
-    this.setState({username: event.target.value});
+    this.setState({ username: event.target.value });
   }
 
   handleEmailChange = (event) => {
     // update email information on form change 
-    this.setState({email: event.target.value});
+    this.setState({ email: event.target.value });
   }
 
   handlePassword2Change = (event) => {
     // update confirm password information on input change 
-    this.setState({password2: event.target.value});
+    this.setState({ password2: event.target.value });
   }
 
   updateLogin = () => {
     // Change between login and signup
-    this.setState({signUp: !this.state.signUp})
+    this.setState({ signUp: !this.state.signUp });
+    this.setState({ error: "" });
   }
 
   isResponseOk(response) {
@@ -111,20 +112,20 @@ class App extends React.Component {
         "X-CSRFToken": cookies.get("csrftoken"),
       },
       credentials: "same-origin",
-      body: JSON.stringify({username: this.state.username, password: this.state.password}),
+      body: JSON.stringify({ username: this.state.username, password: this.state.password }),
     })
-    .then(this.isResponseOk)
-    .then((data) => {
-      console.log(data);
-      this.setState({isAuthenticated: true, username: "", password: "", error: ""});
-    })
-    .catch((err) => {
-      console.log(err);
-      this.setState({error: "Wrong username or password."});
-    });
+      .then(this.isResponseOk)
+      .then((data) => {
+        console.log(data);
+        this.setState({ isAuthenticated: true, username: "", password: "", error: "" });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ error: "Wrong username or password." });
+      });
 
   }
-  
+
   register = (event) => {
     // registration api
     event.preventDefault();
@@ -135,19 +136,25 @@ class App extends React.Component {
         "X-CSRFToken": cookies.get("csrftoken"),
       },
       credentials: "same-origin",
-      body: JSON.stringify({username: this.state.username, email: this.state.email, password1: this.state.password, password2: this.state.password2}),
+      body: JSON.stringify({ username: this.state.username, email: this.state.email, password1: this.state.password, password2: this.state.password2 }),
     })
-    .catch((err) => {
-      console.log(err);
-      this.setState({error: err});
-    });
+      .then(this.isResponseOk)
+      .then((data) => {
 
-    // Update state 
-    if (this.state.error == "") {
-      this.setState({signUp: false});
-    }
+        console.log(data.detail);
+        this.setState({ error: data.detail })
+        // return to the login page if successful 
+        if (data.detail === "Successfully registered") {
+          this.setState({ signUp: false });
+        }
 
-    this.setState({error: ""});
+      })
+      .catch((err) => {
+        // console.log(err);
+        console.log('Something went wrong');
+        this.setState({ error: "Failed to register" });
+      });
+
   }
 
   logout = () => {
@@ -155,14 +162,14 @@ class App extends React.Component {
     fetch("/api/logout", {
       credentials: "same-origin",
     })
-    .then(this.isResponseOk)
-    .then((data) => {
-      console.log(data);
-      this.setState({isAuthenticated: false});
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then(this.isResponseOk)
+      .then((data) => {
+        console.log(data);
+        this.setState({ isAuthenticated: false });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     this.count = 0;
   };
@@ -172,8 +179,7 @@ class App extends React.Component {
     // check if authenticated 
     if (!this.state.isAuthenticated) {
 
-      if (!this.state.signUp)
-      {
+      if (!this.state.signUp) {
         // Login Page 
         return (
           <div className="container mt-3">
@@ -222,13 +228,6 @@ class App extends React.Component {
               <div className="form-group">
                 <label htmlFor="username">Password</label>
                 <input type="password" className="form-control" id="password" name="password" value={this.state.password} onChange={this.handlePasswordChange} />
-                <div>
-                  {this.state.error &&
-                    <small className="text-danger">
-                      {this.state.error}
-                    </small>
-                  }
-                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="username">Confirm Password</label>
