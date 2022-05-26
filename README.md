@@ -48,7 +48,7 @@ The website should then be viewable from [http://localhost:8000](http://localhos
 
 ## Updates
 
-The original code was updated to include a sign up page. This was originally not included in the code. 
+This was updated to now include a Sign Up page. This was not initially included in the tutorial, but is in this boilerplate.
 
 The primary dashboard page also collects all the information required and is able to display `whoami` information 
 on load of the new dashboard. This can be updated further in the future to be used as the official "home page" for whatever
@@ -64,4 +64,4 @@ In the future, I will be adding a Forgot Password section to this using Django's
 
 ## Recommendations
 
-For those who plan to use this template to make money, I recommend looking into [Stripe](https://stripe.com/) API and [PayPal](https://developer.paypal.com/api/rest/) API. This will allow for your company to make money from payments directly to the website. 
+For those who plan to use this template to make money, I recommend looking into [Stripe](https://stripe.com/) API and [PayPal](https://developer.paypal.com/api/rest/) API. This will allow for your company to make money from payments directly to the website. Payments will not be covered in this boilerplate.
