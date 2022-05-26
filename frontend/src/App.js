@@ -68,27 +68,32 @@ class App extends React.Component {
   }
 
   handlePasswordChange = (event) => {
+    // update password on form change 
     this.setState({password: event.target.value});
   }
 
   handleUserNameChange = (event) => {
+    // update username information on form change 
     this.setState({username: event.target.value});
   }
 
   handleEmailChange = (event) => {
+    // update email information on form change 
     this.setState({email: event.target.value});
   }
 
   handlePassword2Change = (event) => {
+    // update confirm password information on input change 
     this.setState({password2: event.target.value});
   }
 
   updateLogin = () => {
+    // Change between login and signup
     this.setState({signUp: !this.state.signUp})
-    console.log(this.state.signUp);
   }
 
   isResponseOk(response) {
+    // repsonse is good 
     if (response.status >= 200 && response.status <= 299) {
       return response.json();
     } else {
@@ -97,6 +102,7 @@ class App extends React.Component {
   }
 
   login = (event) => {
+    // login api
     event.preventDefault();
     fetch("/api/login/", {
       method: "POST",
@@ -120,6 +126,7 @@ class App extends React.Component {
   }
   
   register = (event) => {
+    // registration api
     event.preventDefault();
     fetch("/api/register/", {
       method: "POST",
@@ -144,6 +151,7 @@ class App extends React.Component {
   }
 
   logout = () => {
+    // Logout api
     fetch("/api/logout", {
       credentials: "same-origin",
     })
@@ -243,6 +251,7 @@ class App extends React.Component {
 
     }
 
+    // Collect user information
     if (this.count < 1) {
       this.whoami();
       this.count += 1;

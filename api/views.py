@@ -102,6 +102,12 @@ def check_password_strength(passwrd):
 
 @require_POST
 def register_view(request):
+    """
+    Register a new user 
+
+    :param request: request information
+    :return: return the JSON response 
+    """
     # register new user 
     if request.method == 'POST':
         # ensure only post request 
