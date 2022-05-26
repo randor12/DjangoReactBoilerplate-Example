@@ -64,4 +64,4 @@ In the future, I will be adding a Forgot Password section to this using Django's
 
 ## Recommendations
 
-For those who plan to use this template to make money, I recommend looking into [Stripe](https://stripe.com/) API and PayPal API. This will allow for your company to make money from payments directly to the website. 
+For those who plan to use this template to make money, I recommend looking into [Stripe](https://stripe.com/) API and [PayPal](https://developer.paypal.com/api/rest/) API. This will allow for your company to make money from payments directly to the website. 
