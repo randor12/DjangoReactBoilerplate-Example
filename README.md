@@ -57,3 +57,11 @@ application is being worked on. With the current implementation, the website can
 However, if multiple URLs are implemented, the backend code can be updated to reflect the following [code](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_same_origin) or a [DRF Approach](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_drf_same_origin).
 
 Finally, if authentication someone wishes to authenticate once across mutliple domains, the following [code](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_cross_origin) would be useful. All of these codes are also found in the tutorial.
+
+## Future Plans
+
+In the future, I will be adding a Forgot Password section to this using Django's Email server. The dashboard will also be updated further for a better starting point going forwards. 
+
+## Recommendations
+
+For those who plan to use this template to make money, I recommend looking into `Stripe` API and PayPal API. This will allow for your company to make money from payments directly to the website. 
