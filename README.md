@@ -24,10 +24,9 @@ Copy the key and add to the `.env` file as such:
 
 ```
 SECRET_KEY="{ SECRET_KEY_HERE }"
-DEVELOPMENT=1
 ```
 
-When moving to production, remove the DEVELOPMENT from the `.env` file. 
+When moving to production, add `PRODUCTION=1` to the `.env` file. 
 
 The original code created by testdriven.io can be found [here](https://github.com/duplxey/django-spa-cookie-auth/tree/master/django_react_templates). 
 
