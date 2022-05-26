@@ -21,6 +21,8 @@ class App extends React.Component {
       signUp: false,
     };
 
+    this.count = 0;
+
   }
 
   // Initialize sessions 
@@ -114,6 +116,7 @@ class App extends React.Component {
       console.log(err);
       this.setState({error: "Wrong username or password."});
     });
+
   }
   
   register = (event) => {
@@ -152,6 +155,8 @@ class App extends React.Component {
     .catch((err) => {
       console.log(err);
     });
+
+    this.count = 0;
   };
 
 
@@ -185,7 +190,8 @@ class App extends React.Component {
               </div>
               <button type="submit" className="btn btn-primary">Login</button>
             </form>
-            <button type="button" className="btn btn-link" onClick={this.updateLogin}>Sign Up</button>
+            {/* <button type="button" className="btn btn-link" onClick={this.updateLogin}>Sign Up</button> */}
+            <a className="btn-link" onClick={this.updateLogin}>Sign Up</a>
           </div>
         );
       }
@@ -229,19 +235,26 @@ class App extends React.Component {
               </div>
               <button type="submit" className="btn btn-primary">Register</button>
             </form>
-            <button type="button" className="btn btn-link" onClick={this.updateLogin}>Login</button>
+            {/* <button type="button" className="btn btn-link" onClick={this.updateLogin}>Login</button> */}
+            <a className="btn-link" onClick={this.updateLogin}>Login</a>
           </div>
         );
       }
 
     }
+
+    if (this.count < 1) {
+      this.whoami();
+      this.count += 1;
+    }
+
     return (
       // Dashboard / Main site
       <div className="container mt-3">
         <h1>React Cookie Auth</h1>
         <p>You are logged in!</p>
-        <p>Welcome {this.state.username}!</p>
-        <button className="btn btn-primary mr-2" onClick={this.whoami}>WhoAmI</button>
+        <p>{`Welcome ${this.state.username}!`}</p>
+        {/* <button className="btn btn-primary mr-2" onClick={this.whoami}>WhoAmI</button> */}
         <button className="btn btn-danger" onClick={this.logout}>Log out</button>
       </div>
     )
